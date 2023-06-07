@@ -32,7 +32,6 @@ function itemNumber(selection, id, inStock) {
 
 // Calls list of all items in catalog and dynamically renders item cards + item modals
 function refreshItems(itemsLength,divToAppend) {
-  //var fullURL = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
   $.ajax({
     type: 'GET',
     url: location.origin + "/catalogManager/items",
@@ -43,11 +42,11 @@ function refreshItems(itemsLength,divToAppend) {
 
       for (i = 0; i < itemsLength; i++) {
 
-        var item_ref = allItemsJson[i].itemRef;
-        var item_description = allItemsJson[i].itemDescription;
-        var item_cost = "£" + parseFloat(allItemsJson[i].itemCost).toFixed(2);
-        var item_stock = "In Stock: " + allItemsJson[i].inStock;
-        var item_maxnumber = allItemsJson[i].inStock;
+        var item_ref = allItemsJson[i].information.itemReference;
+        var item_description = allItemsJson[i].information.description;
+        var item_cost = "£" + parseFloat(allItemsJson[i].information.cost).toFixed(2);
+        var item_stock = "In Stock: " + allItemsJson[i].information.stock;
+        var item_maxnumber = allItemsJson[i].information.stock;
 
         // Some returned items are blank (item_ref=0). Don't attempt to make cards from these
         if (item_ref != 0) {
@@ -102,7 +101,6 @@ function buyItem(id) {
   //get number of items requested from modal
   var numberOfItems = parseInt(document.getElementById("number_" + id).innerHTML);
   var nameOfItem = document.getElementById("name_" + id).innerHTML.trim();
-  //var fullURL = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
 
   var buyurl = location.origin + "/catalogManager/buy/00" + id + "/"+numberOfItems+"";
   console.log("BUY URL IS : " + buyurl);
@@ -112,7 +110,7 @@ function buyItem(id) {
     url: buyurl,
     contentType: 'application/json',
     success: function (r) {
-      alert("Thank you for buying " + numberOfItems + " order(s) of " + nameOfItem + "!");
+      alert("Ordering " + numberOfItems + " item(s) of " + nameOfItem + ".\n\n\nResponse from server:\n\n" + r);
 
       /*If successful, refresh page*/
       window.location.reload()

@@ -1,19 +1,19 @@
 {
-  "name": "cics_nodejs_invoke",
+  "name": "office_catalog_client",
   "version": "0.1.0",
   "description": "Blah",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cicsdev/cics-nodejs-invoke.git"
+    "url": "https://github.com/ibm-z-pot/test-client.git"
   },
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
+    "axios": "^1.2.1",
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "ibm-cics-api": "^1.0.1"
+    "express": "^4.16.4"
   }
 }
