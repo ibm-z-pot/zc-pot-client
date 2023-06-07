@@ -92,9 +92,7 @@ app.get('/catalogManager/items', function (req, res) {
       itemsArray = itemsArray.concat(response.data.items);      
     })
     .catch(function (error) {
-      
-      
-      .log(error.toJSON());
+      console.log(error.toJSON());
     })
     .finally(function () {
       // always executed
