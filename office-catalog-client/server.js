@@ -24,6 +24,7 @@ var apiScheme = process.env.API_SCHEME || 'http';
 var apiHost = process.env.API_HOST || 'zt01.mop.ibm';
 var apiPort = process.env.API_PORT || '9080';
 var apiContextRoot = process.env.API_CONTEXT_ROOT || '';
+var apiLogLevel = process.env.API_LOG_LEVEL || 'INFO';
 
 // Global axios defaults
 axios.defaults.baseURL = apiScheme + '://' + apiHost + ':' + apiPort + apiContextRoot;
@@ -67,8 +68,10 @@ app.get('/catalogManager/items', function (req, res) {
 
   var promise1 = axios.get(itemsPath1)
     .then(function (response) {
-      console.log('API Response: Get first set of items returned ' + response.data.totalItems + ' items: ');
-      console.dir(response.data.items);
+      console.log('API Response: Get first set of items returned ' + response.data.totalItems + ' items ');
+      if (apiLogLevel == "DEBUG") {
+         console.dir(response.data.items)
+      }
       itemsArray = itemsArray.concat(response.data.items);      
     })
     .catch(function (error) {
@@ -82,12 +85,16 @@ app.get('/catalogManager/items', function (req, res) {
 
   var promise2 = axios.get(itemsPath2)
     .then(function (response) {
-      console.log('API Response: Get second set of items returned ' + response.data.totalItems + ' items: ');
-      console.dir(response.data.items);
+      console.log('API Response: Get second set of items returned ' + response.data.totalItems + ' items ');
+      if (apiLogLevel == "DEBUG") {
+         console.dir(response.data.items)
+      }
       itemsArray = itemsArray.concat(response.data.items);      
     })
     .catch(function (error) {
-      console.log(error.toJSON());
+      
+      
+      .log(error.toJSON());
     })
     .finally(function () {
       // always executed
