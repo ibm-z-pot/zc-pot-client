@@ -19,7 +19,7 @@ var app = express();
 app.use(bodyParser.json());
 
 // Read in variables
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 var apiScheme = process.env.API_SCHEME || 'http';
 var apiHost = process.env.API_HOST || 'zt01.mop.ibm';
 var apiPort = process.env.API_PORT || '9080';
